@@ -117,9 +117,9 @@ class HistoryWindow:
             # Pemenang
             winner = game['winner']
             if winner == 'B':
-                winner_text = "Hitam"
+                winner_text = "Black"
             elif winner == 'W':
-                winner_text = "Putih"
+                winner_text = "White"
             else:
                 winner_text = "Seri"
             
@@ -155,6 +155,7 @@ class HistoryWindow:
         
         return surf
     
+    # Gambar grafik statistik bot vs bot
     def draw_graph(self):
         # Filter hanya game bot vs bot
         bvb_games = [game for game in self.history if game['mode'] == 'bvb']
@@ -175,7 +176,7 @@ class HistoryWindow:
         fig, ax = plt.subplots(figsize=(6, 4), dpi=100)
         
         # Data untuk pie chart
-        labels = ['Hitam Menang', 'Putih Menang', 'Seri']
+        labels = ['Black Menang', 'While Menang', 'Seri']
         sizes = [black_wins, white_wins, draws]
         colors = ['#000000', '#FFFFFF', '#808080']  # Hitam, Putih, Abu-abu
         
@@ -243,8 +244,8 @@ class HistoryWindow:
         # Informasi statistik detail
         stats_text = [
             f"Total Permainan: {total_games}",
-            f"Hitam Menang: {black_wins} ({black_wins/total_games*100:.1f}%)",
-            f"Putih Menang: {white_wins} ({white_wins/total_games*100:.1f}%)", 
+            f"Black Menang: {black_wins} ({black_wins/total_games*100:.1f}%)",
+            f"While Menang: {white_wins} ({white_wins/total_games*100:.1f}%)", 
             f"Seri: {draws} ({draws/total_games*100:.1f}%)"
         ]
         

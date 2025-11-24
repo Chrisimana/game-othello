@@ -191,19 +191,19 @@ class GameWindow:
     def draw_player_info(self):
         # Informasi pemain saat ini
         if self.game_logic.board.current_player == 'B':
-            current_player = "Hitam (B)"
+            current_player = "Black (B)"
         else:
-            current_player = "Putih (W)"
+            current_player = "While (W)"
             
         current_text = f"Giliran: {current_player}"
         
         # Skor
         black_score, white_score = self.game_logic.board.get_score()
-        score_text = f"Hitam: {black_score}  -  Putih: {white_score}"
+        score_text = f"Black: {black_score}  -  While: {white_score}"
         
         # Mode info
         if self.game_logic.game_mode == 'pvb':
-            mode_info = "Anda: Hitam | Bot: Putih"
+            mode_info = "Anda: Black | Bot: While"
         else:
             mode_info = ""
         
@@ -240,13 +240,13 @@ class GameWindow:
         black_score, white_score = self.game_logic.board.get_score()
         
         if winner == 'B':
-            result_text = "Hitam Menang!"
+            result_text = "Black Menang!"
         elif winner == 'W':
-            result_text = "Putih Menang!"
+            result_text = "While Menang!"
         else:
             result_text = "Permainan Seri!"
         
-        score_text = f"Hitam {black_score} - {white_score} Putih"
+        score_text = f"Black {black_score} - {white_score} While"
         
         # Render teks
         result_surface = self.title_font.render(result_text, True, BLACK)

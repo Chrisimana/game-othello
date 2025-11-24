@@ -44,6 +44,7 @@ class MainMenu:
         button_width, button_height = 250, 50
         center_x = screen.get_width() // 2 - button_width // 2
         
+        # Tombol menu utama
         self.buttons = [
             Button(center_x, 150, button_width, button_height, "Player vs Player"),
             Button(center_x, 220, button_width, button_height, "Player vs Bot"),
@@ -52,6 +53,7 @@ class MainMenu:
             Button(center_x, 430, button_width, button_height, "Keluar Game")
         ]
         
+        # Tombol menu tingkat kesulitan Player vs Bot
         self.difficulty_buttons = [
             Button(center_x, 220, button_width, button_height, "Mudah"),
             Button(center_x, 290, button_width, button_height, "Sedang"),
@@ -59,6 +61,7 @@ class MainMenu:
             Button(center_x, 430, button_width, button_height, "Kembali")
         ]
         
+        # Tombol menu jumlah permainan Bot vs Bot
         self.bot_game_buttons = [
             Button(center_x, 220, button_width, button_height, "1 Permainan"),
             Button(center_x, 290, button_width, button_height, "10 Permainan"),
@@ -67,6 +70,7 @@ class MainMenu:
             Button(center_x, 500, button_width, button_height, "Kembali")
         ]
         
+        # Status menu saat ini
         self.current_menu = "main"  # "main", "pvb_difficulty", "bvb_games"
     
     # Menjalankan loop utama menu

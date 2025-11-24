@@ -17,9 +17,9 @@ class GameLogic:
             # Untuk BvB, buat AI dengan seed yang berbeda untuk variasi
             import time
             seed = int(time.time() * 1000) % 1000000
-            random.seed(seed + 1)  # Seed berbeda untuk hitam
+            random.seed(seed + 1)  # Seed berbeda untuk black
             self.ai_black = OthelloAI(ai_difficulty)
-            random.seed(seed + 2)  # Seed berbeda untuk putih  
+            random.seed(seed + 2)  # Seed berbeda untuk while  
             self.ai_white = OthelloAI(ai_difficulty)
             random.seed()  # Kembali ke random seed normal
     
