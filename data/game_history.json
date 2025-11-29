@@ -898,5 +898,68 @@
     "winner": "B",
     "game_number": 100,
     "timestamp": "2025-11-23T21:34:30.351444"
+  },
+  {
+    "mode": "bvb",
+    "difficulty": "medium",
+    "black_score": 46,
+    "white_score": 18,
+    "winner": "B",
+    "game_number": 1,
+    "timestamp": "2025-11-29T11:14:52.296796"
+  },
+  {
+    "mode": "bvb",
+    "difficulty": "medium",
+    "black_score": 34,
+    "white_score": 30,
+    "winner": "B",
+    "game_number": 1,
+    "timestamp": "2025-11-29T11:17:07.914795"
+  },
+  {
+    "mode": "bvb",
+    "difficulty": "medium",
+    "black_score": 13,
+    "white_score": 51,
+    "winner": "W",
+    "game_number": 1,
+    "timestamp": "2025-11-29T12:05:09.212119"
+  },
+  {
+    "mode": "bvb",
+    "difficulty": "alphabeta",
+    "black_score": 5,
+    "white_score": 59,
+    "winner": "W",
+    "game_number": 1,
+    "timestamp": "2025-11-29T12:10:36.303618"
+  },
+  {
+    "mode": "bvb",
+    "difficulty": "alphabeta",
+    "black_score": 20,
+    "white_score": 44,
+    "winner": "W",
+    "game_number": 1,
+    "timestamp": "2025-11-29T12:20:50.780005"
+  },
+  {
+    "mode": "bvb_compare",
+    "difficulty": "minimax_vs_alphabeta",
+    "black_score": 10,
+    "white_score": 54,
+    "winner": "W",
+    "game_number": 1,
+    "timestamp": "2025-11-29T12:32:40.152616"
+  },
+  {
+    "mode": "pvb",
+    "difficulty": "minimax",
+    "black_score": 21,
+    "white_score": 43,
+    "winner": "W",
+    "game_number": 1,
+    "timestamp": "2025-11-29T12:33:12.845593"
   }
 ]

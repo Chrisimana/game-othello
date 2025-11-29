@@ -1,27 +1,76 @@
 import random
 from game.board import Board
-from game.ai import OthelloAI
 from utils.helpers import save_game_history
+from game.minmaxAI import MinimaxAI
+from game.alphabetaAI import AlphaBetaAI
 
 # Logika utama permainan Othello
 class GameLogic:
-    def __init__(self, game_mode='pvp', ai_difficulty='medium', num_games=1):
+    def __init__(self, game_mode='pvp', ai_difficulty='alphabeta', num_games=1):
         self.board = Board()
         self.game_mode = game_mode
+        # ai_difficulty dipakai untuk pvb dan bvb biasa
         self.ai_difficulty = ai_difficulty
         self.num_games = num_games
         self.current_game = 1
         self.game_results = []
-        
-        if game_mode in ['pvb', 'bvb']:
-            # Untuk BvB, buat AI dengan seed yang berbeda untuk variasi
+
+        if game_mode in ['pvb', 'bvb', 'bvb_compare']:
             import time
             seed = int(time.time() * 1000) % 1000000
-            random.seed(seed + 1)  # Seed berbeda untuk black
-            self.ai_black = OthelloAI(ai_difficulty)
-            random.seed(seed + 2)  # Seed berbeda untuk while  
-            self.ai_white = OthelloAI(ai_difficulty)
-            random.seed()  # Kembali ke random seed normal
+
+            if game_mode == 'bvb_compare':
+                # Hitam = Minimax, Putih = Alpha-Beta
+                random.seed(seed + 1)
+                self.ai_black = MinimaxAI()
+                random.seed(seed + 2)
+                self.ai_white = AlphaBetaAI()
+                random.seed()
+                # Supaya di history kelihatan jelas
+                self.ai_difficulty = 'minimax_vs_alphabeta'
+            else:
+                # mode pvb / bvb biasa: satu jenis algoritma untuk kedua bot
+                if self.ai_difficulty == 'minimax':
+                    AIClass = MinimaxAI
+                else:
+                    AIClass = AlphaBetaAI
+
+                random.seed(seed + 1)
+                self.ai_black = AIClass()
+                random.seed(seed + 2)
+                self.ai_white = AIClass()
+                random.seed()
+
+    def ai_move(self):
+        if self.board.is_game_over():
+            return False
+
+        current_player = self.board.current_player
+
+        try:
+            if current_player == 'B' and self.game_mode in ['pvb', 'bvb', 'bvb_compare']:
+                move = self.ai_black.get_move(self.board, 'B')
+            elif current_player == 'W' and self.game_mode in ['pvb', 'bvb', 'bvb_compare']:
+                move = self.ai_white.get_move(self.board, 'W')
+            else:
+                return False
+
+            if move and self.board.make_move(move[0], move[1], current_player):
+                self.board.current_player = 'W' if current_player == 'B' else 'B'
+                return True
+
+            # Jika tidak ada gerakan valid, lewati giliran
+            if not move:
+                self.board.current_player = 'W' if current_player == 'B' else 'B'
+                return True
+
+        except Exception as e:
+            print(f"Error in AI move: {e}")
+            self.board.current_player = 'W' if current_player == 'B' else 'B'
+            return True
+
+        return False
+             
     
     # Lakukan gerakan untuk pemain manusia
     def make_move(self, row, col):
@@ -44,38 +93,6 @@ class GameLogic:
                 self.board.current_player = 'W'
                 return True
                 
-        return False
-    
-    # Lakukan gerakan untuk AI
-    def ai_move(self):
-        if self.board.is_game_over():
-            return False
-        
-        current_player = self.board.current_player
-        
-        try:
-            if current_player == 'B' and self.game_mode in ['pvb', 'bvb']:
-                move = self.ai_black.get_move(self.board, 'B')
-            elif current_player == 'W' and self.game_mode in ['pvb', 'bvb']:
-                move = self.ai_white.get_move(self.board, 'W')
-            else:
-                return False
-            
-            if move and self.board.make_move(move[0], move[1], current_player):
-                self.board.current_player = 'W' if current_player == 'B' else 'B'
-                return True
-            
-            # Jika tidak ada gerakan valid, lewati giliran
-            if not move:
-                self.board.current_player = 'W' if current_player == 'B' else 'B'
-                return True
-                
-        except Exception as e:
-            print(f"Error in AI move: {e}")
-            # Jika ada error, lewati giliran
-            self.board.current_player = 'W' if current_player == 'B' else 'B'
-            return True
-        
         return False
     
     # Simpan hasil permainan

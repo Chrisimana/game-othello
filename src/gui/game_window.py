@@ -44,7 +44,8 @@ class GameWindow:
                     
                     # Handle klik untuk menutup pesan game over
                     if self.game_over and self.waiting_for_click:
-                        if self.game_logic.game_mode == 'bvb' and self.game_logic.next_game():
+                        # Cek mode bvb atau bvb_compare untuk lanjut game
+                        if self.game_logic.game_mode in ['bvb', 'bvb_compare'] and self.game_logic.next_game():
                             # Lanjut ke game berikutnya untuk BvB
                             self.game_over = False
                             self.waiting_for_click = False
@@ -55,6 +56,7 @@ class GameWindow:
                         continue
                     
                     # Handle klik papan untuk pemain manusia
+                    # Mode PVP atau PVB (saat giliran user/hitam)
                     if not self.game_over and (self.game_logic.game_mode == 'pvp' or 
                         (self.game_logic.game_mode == 'pvb' and 
                          self.game_logic.board.current_player == 'B')):
@@ -68,16 +70,20 @@ class GameWindow:
                                     self.waiting_for_click = True
             
             # Handle gerakan AI
+            # PERBAIKAN: Menambahkan 'bvb_compare' ke dalam list pengecekan mode
             if (not self.game_over and 
-                self.game_logic.game_mode in ['pvb', 'bvb'] and
+                self.game_logic.game_mode in ['pvb', 'bvb', 'bvb_compare'] and
                 current_time - last_ai_move_time > ai_move_delay):
                 
                 current_player = self.game_logic.board.current_player
                 
-                # Untuk BvB, kedua pemain adalah AI
-                if (self.game_logic.game_mode == 'pvb' and current_player == 'W') or \
-                   (self.game_logic.game_mode == 'bvb'):
-                    
+                # Kondisi AI bergerak:
+                # 1. Mode PvB dan giliran Putih (Bot)
+                # 2. Mode BvB atau BvB Compare (kedua pemain adalah AI)
+                is_ai_turn = (self.game_logic.game_mode == 'pvb' and current_player == 'W') or \
+                             (self.game_logic.game_mode in ['bvb', 'bvb_compare'])
+
+                if is_ai_turn:
                     if self.game_logic.ai_move():
                         last_ai_move_time = current_time
                         
@@ -93,20 +99,17 @@ class GameWindow:
     # Konversi posisi mouse ke posisi papan
     def get_board_position(self, mouse_pos):
         mouse_x, mouse_y = mouse_pos
-        
-        # Cek apakah klik di dalam papan
+
         if (self.board_x <= mouse_x < self.board_x + BOARD_SIZE * CELL_SIZE and
             self.board_y <= mouse_y < self.board_y + BOARD_SIZE * CELL_SIZE):
-            
-            # Hitung posisi sel
-            board_x = (mouse_x - self.board_x) // CELL_SIZE
-            board_y = (mouse_y - self.board_y) // CELL_SIZE
-            
-            # Validasi posisi
-            if 0 <= board_x < BOARD_SIZE and 0 <= board_y < BOARD_SIZE:
-                return board_x, board_y
-        
+
+            col = (mouse_x - self.board_x) // CELL_SIZE
+            row = (mouse_y - self.board_y) // CELL_SIZE
+
+            if 0 <= row < BOARD_SIZE and 0 <= col < BOARD_SIZE:
+                return row, col  # BALIK: row dulu, baru col
         return None, None
+
     
     # Gambar seluruh jendela permainan
     def draw(self):
@@ -124,6 +127,8 @@ class GameWindow:
             title = "Player vs Player"
         elif self.game_logic.game_mode == 'pvb':
             title = f"Player vs Bot ({self.game_logic.ai_difficulty})"
+        elif self.game_logic.game_mode == 'bvb_compare':
+            title = f"Minimax vs AlphaBeta - Game {self.game_logic.current_game}/{self.game_logic.num_games}"
         else:  # bvb
             title = f"Bot vs Bot - Game {self.game_logic.current_game}/{self.game_logic.num_games}"
         
@@ -193,17 +198,19 @@ class GameWindow:
         if self.game_logic.board.current_player == 'B':
             current_player = "Black (B)"
         else:
-            current_player = "While (W)"
+            current_player = "White (W)"
             
         current_text = f"Giliran: {current_player}"
         
         # Skor
         black_score, white_score = self.game_logic.board.get_score()
-        score_text = f"Black: {black_score}  -  While: {white_score}"
+        score_text = f"Black: {black_score}  -  White: {white_score}"
         
         # Mode info
         if self.game_logic.game_mode == 'pvb':
-            mode_info = "Anda: Black | Bot: While"
+            mode_info = "Anda: Black | Bot: White"
+        elif self.game_logic.game_mode == 'bvb_compare':
+            mode_info = "Black: Minimax | White: Alpha-Beta"
         else:
             mode_info = ""
         
@@ -242,11 +249,11 @@ class GameWindow:
         if winner == 'B':
             result_text = "Black Menang!"
         elif winner == 'W':
-            result_text = "While Menang!"
+            result_text = "White Menang!"
         else:
             result_text = "Permainan Seri!"
         
-        score_text = f"Black {black_score} - {white_score} While"
+        score_text = f"Black {black_score} - {white_score} White"
         
         # Render teks
         result_surface = self.title_font.render(result_text, True, BLACK)
@@ -260,7 +267,8 @@ class GameWindow:
         self.screen.blit(score_surface, score_rect)
         
         # Tombol berdasarkan mode
-        if self.game_logic.game_mode == 'bvb' and self.game_logic.current_game < self.game_logic.num_games:
+        is_multi_game = self.game_logic.game_mode in ['bvb', 'bvb_compare']
+        if is_multi_game and self.game_logic.current_game < self.game_logic.num_games:
             button_text = "Lanjut"
         else:
             button_text = "Tutup"

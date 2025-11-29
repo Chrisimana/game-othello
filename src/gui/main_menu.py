@@ -48,18 +48,19 @@ class MainMenu:
         self.buttons = [
             Button(center_x, 150, button_width, button_height, "Player vs Player"),
             Button(center_x, 220, button_width, button_height, "Player vs Bot"),
-            Button(center_x, 290, button_width, button_height, "Bot vs Bot"),
-            Button(center_x, 360, button_width, button_height, "Riwayat"),
-            Button(center_x, 430, button_width, button_height, "Keluar Game")
+            Button(center_x, 290, button_width, button_height, "Bot vs Bot (Sama)"),
+            Button(center_x, 360, button_width, button_height, "Bot Minimax vs Alpha-Beta"),
+            Button(center_x, 430, button_width, button_height, "Riwayat"),
+            Button(center_x, 500, button_width, button_height, "Keluar Game")
         ]
         
         # Tombol menu tingkat kesulitan Player vs Bot
         self.difficulty_buttons = [
-            Button(center_x, 220, button_width, button_height, "Mudah"),
-            Button(center_x, 290, button_width, button_height, "Sedang"),
-            Button(center_x, 360, button_width, button_height, "Tinggi"),
-            Button(center_x, 430, button_width, button_height, "Kembali")
+            Button(center_x, 220, button_width, button_height, "Minimax"),
+            Button(center_x, 290, button_width, button_height, "Alpha-Beta"),
+            Button(center_x, 360, button_width, button_height, "Kembali")
         ]
+
         
         # Tombol menu jumlah permainan Bot vs Bot
         self.bot_game_buttons = [
@@ -97,7 +98,7 @@ class MainMenu:
     def handle_main_menu(self, event, mouse_pos):
         for i, button in enumerate(self.buttons):
             button.check_hover(mouse_pos)
-            
+        
             if button.is_clicked(mouse_pos, event):
                 if i == 0:  # Player vs Player
                     from gui.game_window import GameWindow
@@ -105,69 +106,62 @@ class MainMenu:
                     game_window.run()
                 elif i == 1:  # Player vs Bot
                     self.current_menu = "pvb_difficulty"
-                elif i == 2:  # Bot vs Bot
+                elif i == 2:  # Bot vs Bot (algoritma sama, pakai menu jumlah game)
                     self.current_menu = "bvb_games"
-                elif i == 3:  # Riwayat
+                elif i == 3:  # Bot Minimax vs Alpha-Beta
+                    from gui.game_window import GameWindow
+                    # misal jalankan 10 game perbandingan
+                    game_window = GameWindow(self.screen, 'bvb_compare', 'minimax_vs_alphabeta', 10)
+                    game_window.run()
+                elif i == 4:  # Riwayat
                     from gui.history_window import HistoryWindow
                     history_window = HistoryWindow(self.screen)
                     history_window.run()
-                elif i == 4:  # Keluar Game
+                elif i == 5:  # Keluar Game
                     return False
-        
         return True
+
     
     # Menangani menu Player vs Bot - Tingkat Kesulitan
     def handle_pvb_difficulty_menu(self, event, mouse_pos):
         for i, button in enumerate(self.difficulty_buttons):
             button.check_hover(mouse_pos)
-            
             if button.is_clicked(mouse_pos, event):
-                if i == 0:  # Mudah
-                    from gui.game_window import GameWindow
-                    game_window = GameWindow(self.screen, 'pvb', 'easy')
+                from gui.game_window import GameWindow
+                if i == 0:  # Minimax
+                    game_window = GameWindow(self.screen, 'pvb', 'minimax')
                     game_window.run()
                     self.current_menu = "main"
-                elif i == 1:  # Sedang
-                    from gui.game_window import GameWindow
-                    game_window = GameWindow(self.screen, 'pvb', 'medium')
+                elif i == 1:  # Alpha-Beta
+                    game_window = GameWindow(self.screen, 'pvb', 'alphabeta')
                     game_window.run()
                     self.current_menu = "main"
-                elif i == 2:  # Tinggi
-                    from gui.game_window import GameWindow
-                    game_window = GameWindow(self.screen, 'pvb', 'hard')
-                    game_window.run()
+                elif i == 2:  # Kembali
                     self.current_menu = "main"
-                elif i == 3:  # Kembali
-                    self.current_menu = "main"
+
+
     
     # Menangani menu Bot vs Bot
     def handle_bvb_games_menu(self, event, mouse_pos):
         for i, button in enumerate(self.bot_game_buttons):
             button.check_hover(mouse_pos)
-            
             if button.is_clicked(mouse_pos, event):
-                if i == 0:  # 1 Permainan
-                    from gui.game_window import GameWindow
-                    game_window = GameWindow(self.screen, 'bvb', 'medium', 1)
+                from gui.game_window import GameWindow
+                if i == 0:
+                    game_window = GameWindow(self.screen, 'bvb', 'alphabeta', 1)
+                elif i == 1:
+                    game_window = GameWindow(self.screen, 'bvb', 'alphabeta', 10)
+                elif i == 2:
+                    game_window = GameWindow(self.screen, 'bvb', 'alphabeta', 50)
+                elif i == 3:
+                    game_window = GameWindow(self.screen, 'bvb', 'alphabeta', 100)
+                elif i == 4:
+                    self.current_menu = "main"
+                    return
+                if i in [0,1,2,3]:
                     game_window.run()
                     self.current_menu = "main"
-                elif i == 1:  # 10 Permainan
-                    from gui.game_window import GameWindow
-                    game_window = GameWindow(self.screen, 'bvb', 'medium', 10)
-                    game_window.run()
-                    self.current_menu = "main"
-                elif i == 2:  # 50 Permainan
-                    from gui.game_window import GameWindow
-                    game_window = GameWindow(self.screen, 'bvb', 'medium', 50)
-                    game_window.run()
-                    self.current_menu = "main"
-                elif i == 3:  # 100 Permainan
-                    from gui.game_window import GameWindow
-                    game_window = GameWindow(self.screen, 'bvb', 'medium', 100)
-                    game_window.run()
-                    self.current_menu = "main"
-                elif i == 4:  # Kembali
-                    self.current_menu = "main"
+
     
     # Menggambar menu
     def draw(self):
