@@ -59,7 +59,7 @@ class MainMenu:
             Button(center_x, 290, button_width, button_height, "Alpha-Beta"),
             Button(center_x, 360, button_width, button_height, "Kembali")
         ]
-            
+
         
         # Status menu saat ini
         self.current_menu = "main"  # "main", "pvb_difficulty", "bvb_games"
@@ -100,7 +100,7 @@ class MainMenu:
                 elif i == 2:  # Bot Minimax vs Alpha-Beta (sekarang index ke-2)
                     from gui.game_window import GameWindow
                     # misal jalankan 10 game perbandingan
-                    game_window = GameWindow(self.screen, 'bvb_compare', 'minimax_vs_alphabeta', 1)
+                    game_window = GameWindow(self.screen, 'bvb_compare', 'minimax_vs_alphabeta', 10)
                     game_window.run()
                 elif i == 3:  # Keluar Game (sekarang index ke-3)
                     return False

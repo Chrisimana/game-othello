@@ -30,6 +30,9 @@ class GameWindow:
         ai_move_delay = 0.5  # Delay untuk gerakan AI (detik)
         last_ai_move_time = 0
         
+        # Pengecekan awal (jika Hitam tidak punya jalan di awal - sangat jarang tapi mungkin di custom board)
+        self.handle_pass_condition()
+
         while running:
             current_time = time.time()
             mouse_pos = pygame.mouse.get_pos()
@@ -46,12 +49,12 @@ class GameWindow:
                     if self.game_over and self.waiting_for_click:
                         # Cek mode bvb atau bvb_compare untuk lanjut game
                         if self.game_logic.game_mode in ['bvb', 'bvb_compare'] and self.game_logic.next_game():
-                            # Lanjut ke game berikutnya untuk BvB
                             self.game_over = False
                             self.waiting_for_click = False
                             last_ai_move_time = 0
+                            # Cek pass di awal game baru
+                            self.handle_pass_condition()
                         else:
-                            # Untuk mode lain, kembali ke menu
                             running = False
                         continue
                     
@@ -64,37 +67,90 @@ class GameWindow:
                         board_x, board_y = self.get_board_position(mouse_pos)
                         if board_x is not None and board_y is not None:
                             if self.game_logic.make_move(board_x, board_y):
-                                # Cek apakah game selesai setelah move
+                                self.draw() # Update layar segera
+                                
+                                # Cek Game Over dulu
                                 if self.game_logic.check_game_over():
                                     self.game_over = True
                                     self.waiting_for_click = True
-            
+                                else:
+                                    # Jika belum game over, Cek apakah lawan harus PASS
+                                    self.handle_pass_condition()
+
             # Handle gerakan AI
-            # PERBAIKAN: Menambahkan 'bvb_compare' ke dalam list pengecekan mode
             if (not self.game_over and 
                 self.game_logic.game_mode in ['pvb', 'bvb', 'bvb_compare'] and
                 current_time - last_ai_move_time > ai_move_delay):
                 
                 current_player = self.game_logic.board.current_player
                 
-                # Kondisi AI bergerak:
-                # 1. Mode PvB dan giliran Putih (Bot)
-                # 2. Mode BvB atau BvB Compare (kedua pemain adalah AI)
+                # Kondisi AI bergerak
                 is_ai_turn = (self.game_logic.game_mode == 'pvb' and current_player == 'W') or \
                              (self.game_logic.game_mode in ['bvb', 'bvb_compare'])
 
                 if is_ai_turn:
                     if self.game_logic.ai_move():
                         last_ai_move_time = current_time
+                        self.draw() # Update layar segera
                         
-                        # Cek apakah game selesai setelah AI move
                         if self.game_logic.check_game_over():
                             self.game_over = True
                             self.waiting_for_click = True
+                        else:
+                            # Jika belum game over, Cek apakah lawan (Human/Bot lain) harus PASS
+                            self.handle_pass_condition()
             
             self.draw()
             self.clock.tick(60)
-    
+
+    # ---------------------------------------------------------
+    # FITUR BARU: Menangani kondisi PASS
+    # ---------------------------------------------------------
+    def handle_pass_condition(self):
+        """
+        Mengecek apakah pemain saat ini memiliki langkah valid.
+        Jika tidak, tampilkan pesan 'PASS' dan alihkan giliran ke lawan.
+        """
+        current_player = self.game_logic.board.current_player
+        valid_moves = self.game_logic.board.get_valid_moves(current_player)
+        
+        # Jika tidak ada langkah valid (tapi game belum over, artinya lawan masih punya langkah)
+        if not valid_moves and not self.game_logic.board.is_game_over():
+            # 1. Tampilkan pesan PASS
+            self.draw() # Pastikan board terupdate dulu
+            self.draw_pass_message(current_player)
+            pygame.display.flip()
+            
+            # 2. Tunggu sebentar agar user sadar
+            time.sleep(1.5)
+            
+            # 3. Lempar giliran ke lawan secara manual
+            next_player = 'W' if current_player == 'B' else 'B'
+            self.game_logic.board.current_player = next_player
+            print(f"Player {current_player} has no moves. PASS to {next_player}.")
+
+    def draw_pass_message(self, player_color):
+        """Menampilkan overlay pesan PASS."""
+        overlay = pygame.Surface((self.screen.get_width(), self.screen.get_height()), pygame.SRCALPHA)
+        overlay.fill((0, 0, 0, 100)) # Semi-transparent black
+        self.screen.blit(overlay, (0, 0))
+        
+        message_rect = pygame.Rect(0, 0, 300, 100)
+        message_rect.center = (self.screen.get_width() // 2, self.screen.get_height() // 2)
+        
+        pygame.draw.rect(self.screen, WHITE, message_rect, border_radius=10)
+        pygame.draw.rect(self.screen, RED, message_rect, 3, border_radius=10)
+        
+        player_name = "BLACK" if player_color == 'B' else "WHITE"
+        text1 = self.font.render(f"{player_name} Tidak Ada Jalan!", True, BLACK)
+        text2 = self.title_font.render("PASS", True, RED)
+        
+        t1_rect = text1.get_rect(center=(message_rect.centerx, message_rect.centery - 20))
+        t2_rect = text2.get_rect(center=(message_rect.centerx, message_rect.centery + 20))
+        
+        self.screen.blit(text1, t1_rect)
+        self.screen.blit(text2, t2_rect)
+    # ---------------------------------------------------------
 
     # Konversi posisi mouse ke posisi papan
     def get_board_position(self, mouse_pos):
@@ -107,10 +163,9 @@ class GameWindow:
             row = (mouse_y - self.board_y) // CELL_SIZE
 
             if 0 <= row < BOARD_SIZE and 0 <= col < BOARD_SIZE:
-                return row, col  # BALIK: row dulu, baru col
+                return row, col
         return None, None
 
-    
     # Gambar seluruh jendela permainan
     def draw(self):
         self.screen.fill(GREEN)
@@ -228,12 +283,10 @@ class GameWindow:
     
     # Gambar pesan game over
     def draw_game_over(self):
-        # Overlay semi-transparan
         overlay = pygame.Surface((self.screen.get_width(), self.screen.get_height()), pygame.SRCALPHA)
         overlay.fill((0, 0, 0, 128))
         self.screen.blit(overlay, (0, 0))
         
-        # Kotak pesan
         message_rect = pygame.Rect(
             self.screen.get_width() // 2 - 200,
             self.screen.get_height() // 2 - 100,
@@ -242,7 +295,6 @@ class GameWindow:
         pygame.draw.rect(self.screen, GREEN, message_rect, border_radius=10)
         pygame.draw.rect(self.screen, BLACK, message_rect, 2, border_radius=10)
         
-        # Teks hasil
         winner = self.game_logic.board.get_winner()
         black_score, white_score = self.game_logic.board.get_score()
         
@@ -255,18 +307,15 @@ class GameWindow:
         
         score_text = f"Black {black_score} - {white_score} White"
         
-        # Render teks
         result_surface = self.title_font.render(result_text, True, BLACK)
         score_surface = self.font.render(score_text, True, BLACK)
         
-        # Posisi teks
         result_rect = result_surface.get_rect(center=(message_rect.centerx, message_rect.centery - 30))
         score_rect = score_surface.get_rect(center=(message_rect.centerx, message_rect.centery + 10))
         
         self.screen.blit(result_surface, result_rect)
         self.screen.blit(score_surface, score_rect)
         
-        # Tombol berdasarkan mode
         is_multi_game = self.game_logic.game_mode in ['bvb', 'bvb_compare']
         if is_multi_game and self.game_logic.current_game < self.game_logic.num_games:
             button_text = "Lanjut"

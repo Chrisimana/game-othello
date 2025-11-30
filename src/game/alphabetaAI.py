@@ -2,20 +2,21 @@ import random
 from game.base_ai import BaseAI
 
 class AlphaBetaAI(BaseAI):
+    # Menentukan kedalaman pencarian optimal T_T
     def __init__(self, depth=3):
-        # Alpha-Beta lebih efisien, jadi bisa pakai depth lebih tinggi (5)
         self.depth = depth
-
+    # Mendapatkan langkah terbaik menggunakan algoritma Alpha-Beta Pruning :<
     def get_move(self, board, player):
         valid_moves = board.get_valid_moves(player)
         if not valid_moves:
             return None
-
+        # infinity ya 
         best_score = float('-inf')
         best_moves = []
         alpha = float('-inf')
         beta = float('inf')
 
+        # Gunakan depth dari init (looping melalui langkah valid)
         for move in valid_moves:
             test_board = self._copy_board(board)
             if test_board.make_move(move[0], move[1], player):
@@ -62,6 +63,7 @@ class AlphaBetaAI(BaseAI):
                 score = self._alphabeta(test_board, depth - 1, alpha, beta, True, player)
                 value = min(value, score)
                 beta = min(beta, value)
+                # letak pemankasan algorithm (cutting branches) T_T
                 if beta <= alpha:
                     break # Pruning
             return value
