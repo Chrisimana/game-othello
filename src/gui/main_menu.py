@@ -111,7 +111,7 @@ class MainMenu:
                 elif i == 3:  # Bot Minimax vs Alpha-Beta
                     from gui.game_window import GameWindow
                     # misal jalankan 10 game perbandingan
-                    game_window = GameWindow(self.screen, 'bvb_compare', 'minimax_vs_alphabeta', 10)
+                    game_window = GameWindow(self.screen, 'bvb_compare', 'minimax_vs_alphabeta', 1)
                     game_window.run()
                 elif i == 4:  # Riwayat
                     from gui.history_window import HistoryWindow

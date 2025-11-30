@@ -2,7 +2,7 @@ import random
 from game.base_ai import BaseAI
 
 class AlphaBetaAI(BaseAI):
-    def __init__(self, depth=5):
+    def __init__(self, depth=3):
         # Alpha-Beta lebih efisien, jadi bisa pakai depth lebih tinggi (5)
         self.depth = depth
 
