@@ -96,28 +96,28 @@ class GameLogic:
         return False
     
     # Simpan hasil permainan
-    def save_game_result(self):
-        black_score, white_score = self.board.get_score()
-        winner = self.board.get_winner()
+    # def save_game_result(self):
+    #     black_score, white_score = self.board.get_score()
+    #     winner = self.board.get_winner()
         
-        game_data = {
-            'mode': self.game_mode,
-            'difficulty': self.ai_difficulty if self.game_mode != 'pvp' else None,
-            'black_score': black_score,
-            'white_score': white_score,
-            'winner': winner,
-            'game_number': self.current_game if self.game_mode == 'bvb' else 1
-        }
+    #     game_data = {
+    #         'mode': self.game_mode,
+    #         'difficulty': self.ai_difficulty if self.game_mode != 'pvp' else None,
+    #         'black_score': black_score,
+    #         'white_score': white_score,
+    #         'winner': winner,
+    #         'game_number': self.current_game if self.game_mode == 'bvb' else 1
+    #     }
         
-        self.game_results.append(game_data)
+    #     self.game_results.append(game_data)
         
-        if self.game_mode != 'bvb' or self.current_game == self.num_games:
-            # Untuk bvb, simpan semua hasil sekaligus di akhir
-            if self.game_mode == 'bvb' and self.current_game == self.num_games:
-                for result in self.game_results:
-                    save_game_history(result)
-            else:
-                save_game_history(game_data)
+    #     if self.game_mode != 'bvb' or self.current_game == self.num_games:
+    #         # Untuk bvb, simpan semua hasil sekaligus di akhir
+    #         if self.game_mode == 'bvb' and self.current_game == self.num_games:
+    #             for result in self.game_results:
+    #                 save_game_history(result)
+    #         else:
+    #             save_game_history(game_data)
     
     # Lanjutkan ke permainan berikutnya (bot vs bot)
     def next_game(self):
@@ -130,6 +130,6 @@ class GameLogic:
     # Cek apakah permainan selesai dan handle hasil
     def check_game_over(self):
         if self.board.is_game_over():
-            self.save_game_result()
+            # self.save_game_result()
             return True
         return False
