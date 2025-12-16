@@ -1,155 +1,194 @@
 import pygame
-import sys
 from utils.constants import *
+from gui.game_window import GameWindow
+from gui.history_window import HistoryWindow
+from gui.ui_components import Button, InputBox
 
-# Kelas untuk tombol
-class Button:
-    def __init__(self, x, y, width, height, text, color=GREEN, hover_color=DARK_GREEN):
-        self.rect = pygame.Rect(x, y, width, height)
-        self.text = text
-        self.color = color
-        self.hover_color = hover_color
-        self.is_hovered = False
-        self.font = pygame.font.SysFont('Arial', 24)
-    
-    # Menggambar tombol
-    def draw(self, screen):
-        color = self.hover_color if self.is_hovered else self.color
-        pygame.draw.rect(screen, color, self.rect, border_radius=10)
-        pygame.draw.rect(screen, BLACK, self.rect, 2, border_radius=10)
-        
-        text_surface = self.font.render(self.text, True, WHITE)
-        text_rect = text_surface.get_rect(center=self.rect.center)
-        screen.blit(text_surface, text_rect)
-    
-    # Memeriksa apakah mouse berada di atas tombol
-    def check_hover(self, pos):
-        self.is_hovered = self.rect.collidepoint(pos)
-    
-    # Memeriksa apakah tombol diklik
-    def is_clicked(self, pos, event):
-        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-            return self.rect.collidepoint(pos)
-        return False
-
-# Kelas untuk menu utama
 class MainMenu:
     def __init__(self, screen):
         self.screen = screen
         self.clock = pygame.time.Clock()
         self.font = pygame.font.SysFont('Arial', 36)
         self.title_font = pygame.font.SysFont('Arial', 48, bold=True)
+        self.small_font = pygame.font.SysFont('Arial', 20)
         
-        # Buat tombol
+        self.selected_depth = 3
+        self.selected_time = None
+        self.temp_game_mode = None
+        self.temp_ai_difficulty = None
+        
+        # Pilihan Algoritma Default
+        self.black_choice = 'minimax'
+        self.white_choice = 'alphabeta'
+        
         button_width, button_height = 250, 50
         center_x = screen.get_width() // 2 - button_width // 2
         
-        # Tombol menu utama
-        # Tombol menu utama
+        start_y = 140
+        gap = 60
         self.buttons = [
-            Button(center_x, 150, button_width, button_height, "Player vs Player"),
-            Button(center_x, 220, button_width, button_height, "Player vs Bot"),
-            Button(center_x, 290, button_width, button_height, "Bot Minimax vs Alpha-Beta"),
-            Button(center_x, 360, button_width, button_height, "Keluar Game")
+            Button(center_x, start_y, button_width, button_height, "Player vs Player"),
+            Button(center_x, start_y + gap, button_width, button_height, "Player vs Bot"),
+            Button(center_x, start_y + gap*2, button_width, button_height, "Bot vs Bot (Custom)"),
+            Button(center_x, start_y + gap*3, button_width, button_height, "Riwayat BvB"),
+            Button(center_x, start_y + gap*4, button_width, button_height, "Keluar Game")
         ]
         
-        # Tombol menu tingkat kesulitan Player vs Bot
         self.difficulty_buttons = [
             Button(center_x, 220, button_width, button_height, "Minimax"),
             Button(center_x, 290, button_width, button_height, "Alpha-Beta"),
             Button(center_x, 360, button_width, button_height, "Kembali")
         ]
-
         
-        # Status menu saat ini
-        self.current_menu = "main"  # "main", "pvb_difficulty", "bvb_games"
+        # layout pengaturan T_T
+        center_w = screen.get_width() // 2
+        
+        # Tombol Depth
+        self.btn_depth_minus = Button(center_w - 120, 190, 50, 50, "-")
+        self.btn_depth_plus = Button(center_w + 70, 190, 50, 50, "+")
+        
+        # Input Box Waktu
+        self.time_input = InputBox(center_w - 70, 290, 140, 40, text='2.0') 
+        
+        # Input Box Iterasi 
+        self.iter_input = InputBox(center_w - 70, 370, 140, 40, text='1000')
+        
+        # Tombol Pilihan Algoritma 
+        self.btn_black_algo = Button(center_w - 260, 450, 250, 40, f"Black: {self.black_choice.title()}", color=BLUE)
+        self.btn_white_algo = Button(center_w + 10, 450, 250, 40, f"White: {self.white_choice.title()}", color=RED)
+        
+        self.btn_start_game = Button(center_x, 520, button_width, button_height, "MULAI GAME", color=RED)
+        self.btn_settings_back = Button(center_x, 590, button_width, button_height, "Kembali")
+
+        self.current_menu = "main"  
     
-    # Menjalankan loop utama menu
     def run(self):
         running = True
         while running:
             mouse_pos = pygame.mouse.get_pos()
-            
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
+                if event.type == pygame.QUIT: running = False
                 
                 if self.current_menu == "main":
-                    running = self.handle_main_menu(event, mouse_pos)
+                    self.handle_main_menu(event, mouse_pos)
+                    if self.current_menu == "exit": return 
                 elif self.current_menu == "pvb_difficulty":
                     self.handle_pvb_difficulty_menu(event, mouse_pos)
-                elif self.current_menu == "bvb_games":
-                    self.handle_bvb_games_menu(event, mouse_pos)
+                elif self.current_menu == "settings":
+                    self.handle_settings_menu(event, mouse_pos)
             
             self.draw()
             self.clock.tick(60)
     
-    # Menangani menu utama
-    # Menangani menu utama
     def handle_main_menu(self, event, mouse_pos):
         for i, button in enumerate(self.buttons):
             button.check_hover(mouse_pos)
-        
             if button.is_clicked(mouse_pos, event):
-                if i == 0:  # Player vs Player
-                    from gui.game_window import GameWindow
-                    game_window = GameWindow(self.screen, 'pvp')
-                    game_window.run()
-                elif i == 1:  # Player vs Bot
-                    self.current_menu = "pvb_difficulty"
-                elif i == 2:  # Bot Minimax vs Alpha-Beta (sekarang index ke-2)
-                    from gui.game_window import GameWindow
-                    # misal jalankan 10 game perbandingan
-                    game_window = GameWindow(self.screen, 'bvb_compare', 'minimax_vs_alphabeta', 10)
-                    game_window.run()
-                elif i == 3:  # Keluar Game (sekarang index ke-3)
-                    return False
-        return True
+                if i == 0: GameWindow(self.screen, 'pvp').run()
+                elif i == 1: self.temp_game_mode = 'pvb'; self.current_menu = "pvb_difficulty"
+                elif i == 2: 
+                    self.temp_game_mode = 'bvb_compare'
+                    self.temp_ai_difficulty = 'custom'
+                    self.black_choice = 'minimax'
+                    self.white_choice = 'alphabeta'
+                    self.btn_black_algo.text = "Black: Minimax"
+                    self.btn_white_algo.text = "White: AlphaBeta"
+                    self.current_menu = "settings"
+                elif i == 3: HistoryWindow(self.screen).run()
+                elif i == 4: self.current_menu = "exit"
 
-    
-    # Menangani menu Player vs Bot - Tingkat Kesulitan
     def handle_pvb_difficulty_menu(self, event, mouse_pos):
         for i, button in enumerate(self.difficulty_buttons):
             button.check_hover(mouse_pos)
             if button.is_clicked(mouse_pos, event):
-                from gui.game_window import GameWindow
-                if i == 0:  # Minimax
-                    game_window = GameWindow(self.screen, 'pvb', 'minimax')
-                    game_window.run()
-                    self.current_menu = "main"
-                elif i == 1:  # Alpha-Beta
-                    game_window = GameWindow(self.screen, 'pvb', 'alphabeta')
-                    game_window.run()
-                    self.current_menu = "main"
-                elif i == 2:  # Kembali
-                    self.current_menu = "main"
+                if i == 0: self.temp_ai_difficulty = 'minimax'; self.current_menu = "settings"
+                elif i == 1: self.temp_ai_difficulty = 'alphabeta'; self.current_menu = "settings"
+                elif i == 2: self.current_menu = "main"
 
-    # Menggambar menu
+    def handle_settings_menu(self, event, mouse_pos):
+        self.btn_depth_minus.check_hover(mouse_pos); self.btn_depth_plus.check_hover(mouse_pos)
+        self.btn_start_game.check_hover(mouse_pos); self.btn_settings_back.check_hover(mouse_pos)
+        self.time_input.handle_event(event)
+        self.iter_input.handle_event(event) 
+
+        if self.btn_depth_minus.is_clicked(mouse_pos, event) and self.selected_depth > 1: self.selected_depth -= 1
+        if self.btn_depth_plus.is_clicked(mouse_pos, event) and self.selected_depth < 20: self.selected_depth += 1
+        
+        # Logic Siklus Algoritma
+        if self.temp_game_mode == 'bvb_compare':
+            algos = ['minimax', 'alphabeta', 'mcts']
+            
+            self.btn_black_algo.check_hover(mouse_pos)
+            if self.btn_black_algo.is_clicked(mouse_pos, event):
+                curr_idx = algos.index(self.black_choice)
+                self.black_choice = algos[(curr_idx + 1) % len(algos)]
+                self.btn_black_algo.text = f"Black: {self.black_choice.title()}"
+                
+            self.btn_white_algo.check_hover(mouse_pos)
+            if self.btn_white_algo.is_clicked(mouse_pos, event):
+                curr_idx = algos.index(self.white_choice)
+                self.white_choice = algos[(curr_idx + 1) % len(algos)]
+                self.btn_white_algo.text = f"White: {self.white_choice.title()}"
+        
+        if self.btn_start_game.is_clicked(mouse_pos, event):
+            final_time = self.time_input.get_value()
+
+            try:
+                final_iter = int(self.iter_input.get_value())
+            except:
+                final_iter = 1000 
+
+            num = 10 if self.temp_game_mode == 'bvb_compare' else 1
+            
+            bot_config = None
+            if self.temp_game_mode == 'bvb_compare':
+                bot_config = {
+                    'black': self.black_choice,
+                    'white': self.white_choice
+                }
+            
+            GameWindow(self.screen, self.temp_game_mode, self.temp_ai_difficulty, num, self.selected_depth, final_time, bot_config, final_iter).run()
+            self.current_menu = "main"
+            
+        if self.btn_settings_back.is_clicked(mouse_pos, event):
+            self.current_menu = "pvb_difficulty" if self.temp_game_mode == 'pvb' else "main"
+
     def draw(self):
         self.screen.fill(GREEN)
+        title_text = "PENGATURAN BOT" if self.current_menu == "settings" else "OTHELLO GAME"
+        title = self.title_font.render(title_text, True, WHITE)
+        self.screen.blit(title, title.get_rect(center=(self.screen.get_width() // 2, 80)))
         
-        # Judul
-        title = self.title_font.render("OTHELLO GAME", True, WHITE)
-        title_rect = title.get_rect(center=(self.screen.get_width() // 2, 80))
-        self.screen.blit(title, title_rect)
-        
-        # Gambar tombol sesuai menu saat ini
         if self.current_menu == "main":
-            for button in self.buttons:
-                button.draw(self.screen)
+            for button in self.buttons: button.draw(self.screen)
         elif self.current_menu == "pvb_difficulty":
-            subtitle = self.font.render("Pilih Bot yang akan dilawan", True, WHITE)
-            subtitle_rect = subtitle.get_rect(center=(self.screen.get_width() // 2, 150))
-            self.screen.blit(subtitle, subtitle_rect)
+            sub = self.font.render("Pilih Bot Lawan", True, WHITE)
+            self.screen.blit(sub, sub.get_rect(center=(self.screen.get_width()//2, 150)))
+            for button in self.difficulty_buttons: button.draw(self.screen)
+        elif self.current_menu == "settings":
+            center_x = self.screen.get_width() // 2
             
-            for button in self.difficulty_buttons:
-                button.draw(self.screen)
-        elif self.current_menu == "bvb_games":
-            subtitle = self.font.render("Pilih Jumlah Permainan", True, WHITE)
-            subtitle_rect = subtitle.get_rect(center=(self.screen.get_width() // 2, 150))
-            self.screen.blit(subtitle, subtitle_rect)
+            # 1. Depth (Minimax/AB)
+            d_lbl = self.font.render("Depth (Minimax/AlphaBeta Only):", True, WHITE)
+            self.screen.blit(d_lbl, d_lbl.get_rect(center=(center_x, 150)))
+            self.btn_depth_minus.draw(self.screen); self.btn_depth_plus.draw(self.screen)
+            d_val = self.title_font.render(str(self.selected_depth), True, WHITE)
+            self.screen.blit(d_val, d_val.get_rect(center=(center_x, 215)))
             
-            for button in self.bot_game_buttons:
-                button.draw(self.screen)
+            # 2. Time Limit
+            t_lbl = self.font.render("Waktu (Detik) - *Kosongkan untuk MCTS Infinity:", True, WHITE)
+            self.screen.blit(t_lbl, t_lbl.get_rect(center=(center_x, 260)))
+            self.time_input.draw(self.screen)
+            
+            # 3. Iterations (MCTS) - --- BARU ---
+            i_lbl = self.font.render("Max Iterasi (MCTS Only):", True, WHITE)
+            self.screen.blit(i_lbl, i_lbl.get_rect(center=(center_x, 340)))
+            self.iter_input.draw(self.screen)
+            
+            if self.temp_game_mode == 'bvb_compare':
+                self.btn_black_algo.draw(self.screen)
+                self.btn_white_algo.draw(self.screen)
+            
+            self.btn_start_game.draw(self.screen); self.btn_settings_back.draw(self.screen)
         
         pygame.display.flip()

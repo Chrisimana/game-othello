@@ -12,11 +12,14 @@ def save_game_history(game_data):
     # Load data yang sudah ada
     if os.path.exists(history_file):
         with open(history_file, 'r') as f:
-            history = json.load(f)
+            try:
+                history = json.load(f)
+            except json.JSONDecodeError:
+                history = []
     else:
         history = []
     
-    # Tambahkan data baru
+    # Tambahkan data baru dengan timestamp
     game_data['timestamp'] = datetime.now().isoformat()
     history.append(game_data)
     
@@ -30,5 +33,8 @@ def load_game_history():
     
     if os.path.exists(history_file):
         with open(history_file, 'r') as f:
-            return json.load(f)
+            try:
+                return json.load(f)
+            except json.JSONDecodeError:
+                return []
     return []

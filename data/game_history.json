@@ -1,0 +1,1250 @@
+[
+  {
+    "mode": "Bot vs Bot",
+    "timestamp": "2025-12-14T23:25:23.906771",
+    "total_games": 10,
+    "result_summary": "Menang: Black (4) - White (6) | Seri: 0",
+    "ai_config": {
+      "black": "AlphaBeta (D=20)",
+      "white": "MCTS (D=20)",
+      "time_limit": 5.0
+    },
+    "winner": "White",
+    "games": [
+      {
+        "no": 1,
+        "winner": "Black",
+        "score_black": 53,
+        "score_white": 11,
+        "black_stats": {
+          "avg_depth": 15.6,
+          "avg_time": 4.2822,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 17166.03,
+          "avg_time": 5.0008,
+          "max_depth": 187132
+        }
+      },
+      {
+        "no": 2,
+        "winner": "White",
+        "score_black": 20,
+        "score_white": 44,
+        "black_stats": {
+          "avg_depth": 14.67,
+          "avg_time": 4.2939,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 11949.1,
+          "avg_time": 5.0009,
+          "max_depth": 80058
+        }
+      },
+      {
+        "no": 3,
+        "winner": "White",
+        "score_black": 26,
+        "score_white": 38,
+        "black_stats": {
+          "avg_depth": 16.71,
+          "avg_time": 4.2852,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 16430.28,
+          "avg_time": 5.0038,
+          "max_depth": 200490
+        }
+      },
+      {
+        "no": 4,
+        "winner": "White",
+        "score_black": 12,
+        "score_white": 52,
+        "black_stats": {
+          "avg_depth": 10.71,
+          "avg_time": 4.6092,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 17346.84,
+          "avg_time": 5.0008,
+          "max_depth": 203032
+        }
+      },
+      {
+        "no": 5,
+        "winner": "Black",
+        "score_black": 43,
+        "score_white": 21,
+        "black_stats": {
+          "avg_depth": 17.55,
+          "avg_time": 4.214,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 17613.48,
+          "avg_time": 5.0008,
+          "max_depth": 200640
+        }
+      },
+      {
+        "no": 6,
+        "winner": "White",
+        "score_black": 22,
+        "score_white": 42,
+        "black_stats": {
+          "avg_depth": 12.93,
+          "avg_time": 4.3419,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 20388.0,
+          "avg_time": 5.0008,
+          "max_depth": 201299
+        }
+      },
+      {
+        "no": 7,
+        "winner": "Black",
+        "score_black": 40,
+        "score_white": 24,
+        "black_stats": {
+          "avg_depth": 14.52,
+          "avg_time": 4.4197,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 21106.0,
+          "avg_time": 5.0008,
+          "max_depth": 204745
+        }
+      },
+      {
+        "no": 8,
+        "winner": "Black",
+        "score_black": 40,
+        "score_white": 24,
+        "black_stats": {
+          "avg_depth": 16.0,
+          "avg_time": 4.2685,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 11893.21,
+          "avg_time": 5.0027,
+          "max_depth": 88806
+        }
+      },
+      {
+        "no": 9,
+        "winner": "White",
+        "score_black": 23,
+        "score_white": 41,
+        "black_stats": {
+          "avg_depth": 8.74,
+          "avg_time": 4.3983,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 16980.53,
+          "avg_time": 5.0009,
+          "max_depth": 203183
+        }
+      },
+      {
+        "no": 10,
+        "winner": "White",
+        "score_black": 13,
+        "score_white": 51,
+        "black_stats": {
+          "avg_depth": 10.71,
+          "avg_time": 4.6017,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 19567.42,
+          "avg_time": 5.0009,
+          "max_depth": 204357
+        }
+      }
+    ]
+  },
+  {
+    "mode": "Bot vs Bot",
+    "timestamp": "2025-12-15T10:45:51.978122",
+    "total_games": 10,
+    "result_summary": "Menang: Black (8) - White (2) | Seri: 0",
+    "ai_config": {
+      "black": "AlphaBeta (D=20)",
+      "white": "Minimax (D=20)",
+      "time_limit": 10.0
+    },
+    "winner": "Black",
+    "games": [
+      {
+        "no": 1,
+        "winner": "White",
+        "score_black": 17,
+        "score_white": 47,
+        "black_stats": {
+          "avg_depth": 8.15,
+          "avg_time": 8.8419,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 10.34,
+          "avg_time": 8.8585,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 2,
+        "winner": "White",
+        "score_black": 31,
+        "score_white": 33,
+        "black_stats": {
+          "avg_depth": 14.48,
+          "avg_time": 8.8303,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 12.47,
+          "avg_time": 8.828,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 3,
+        "winner": "Black",
+        "score_black": 49,
+        "score_white": 15,
+        "black_stats": {
+          "avg_depth": 18.06,
+          "avg_time": 8.3281,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 8.59,
+          "avg_time": 9.0284,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 4,
+        "winner": "Black",
+        "score_black": 33,
+        "score_white": 31,
+        "black_stats": {
+          "avg_depth": 14.93,
+          "avg_time": 8.605,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 10.81,
+          "avg_time": 8.4974,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 5,
+        "winner": "Black",
+        "score_black": 45,
+        "score_white": 18,
+        "black_stats": {
+          "avg_depth": 14.9,
+          "avg_time": 8.5544,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 10.21,
+          "avg_time": 9.0726,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 6,
+        "winner": "Black",
+        "score_black": 41,
+        "score_white": 23,
+        "black_stats": {
+          "avg_depth": 16.0,
+          "avg_time": 8.8255,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 11.72,
+          "avg_time": 8.8627,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 7,
+        "winner": "Black",
+        "score_black": 40,
+        "score_white": 24,
+        "black_stats": {
+          "avg_depth": 15.07,
+          "avg_time": 8.8573,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 10.76,
+          "avg_time": 8.824,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 8,
+        "winner": "Black",
+        "score_black": 40,
+        "score_white": 24,
+        "black_stats": {
+          "avg_depth": 14.73,
+          "avg_time": 8.587,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 8.71,
+          "avg_time": 9.1776,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 9,
+        "winner": "Black",
+        "score_black": 38,
+        "score_white": 25,
+        "black_stats": {
+          "avg_depth": 14.21,
+          "avg_time": 8.7218,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 8.52,
+          "avg_time": 8.7486,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 10,
+        "winner": "Black",
+        "score_black": 41,
+        "score_white": 22,
+        "black_stats": {
+          "avg_depth": 14.93,
+          "avg_time": 8.6109,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 6.83,
+          "avg_time": 8.3929,
+          "max_depth": 64
+        }
+      }
+    ]
+  },
+  {
+    "mode": "Bot vs Bot",
+    "timestamp": "2025-12-15T23:50:04.923049",
+    "total_games": 10,
+    "result_summary": "Menang: Black (9) - White (1) | Seri: 0",
+    "ai_config": {
+      "black": "Minimax (D=20)",
+      "white": "MCTS (D=20)",
+      "time_limit": 5.0
+    },
+    "winner": "Black",
+    "games": [
+      {
+        "no": 1,
+        "winner": "Black",
+        "score_black": 47,
+        "score_white": 17,
+        "black_stats": {
+          "avg_depth": 8.76,
+          "avg_time": 4.6504,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 11124.4,
+          "avg_time": 5.0017,
+          "max_depth": 111730
+        }
+      },
+      {
+        "no": 2,
+        "winner": "Black",
+        "score_black": 40,
+        "score_white": 24,
+        "black_stats": {
+          "avg_depth": 8.9,
+          "avg_time": 4.6372,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 11413.43,
+          "avg_time": 5.0019,
+          "max_depth": 104954
+        }
+      },
+      {
+        "no": 3,
+        "winner": "Black",
+        "score_black": 54,
+        "score_white": 10,
+        "black_stats": {
+          "avg_depth": 9.93,
+          "avg_time": 4.5143,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 10324.17,
+          "avg_time": 5.0019,
+          "max_depth": 97078
+        }
+      },
+      {
+        "no": 4,
+        "winner": "Black",
+        "score_black": 36,
+        "score_white": 28,
+        "black_stats": {
+          "avg_depth": 10.13,
+          "avg_time": 4.5035,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 6224.9,
+          "avg_time": 5.0017,
+          "max_depth": 43569
+        }
+      },
+      {
+        "no": 5,
+        "winner": "Black",
+        "score_black": 51,
+        "score_white": 13,
+        "black_stats": {
+          "avg_depth": 11.67,
+          "avg_time": 4.4811,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 7492.79,
+          "avg_time": 5.0014,
+          "max_depth": 89584
+        }
+      },
+      {
+        "no": 6,
+        "winner": "White",
+        "score_black": 27,
+        "score_white": 37,
+        "black_stats": {
+          "avg_depth": 8.0,
+          "avg_time": 4.7587,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 9823.55,
+          "avg_time": 5.0016,
+          "max_depth": 106554
+        }
+      },
+      {
+        "no": 7,
+        "winner": "Black",
+        "score_black": 41,
+        "score_white": 23,
+        "black_stats": {
+          "avg_depth": 11.6,
+          "avg_time": 4.6329,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 11944.5,
+          "avg_time": 5.0022,
+          "max_depth": 109132
+        }
+      },
+      {
+        "no": 8,
+        "winner": "Black",
+        "score_black": 46,
+        "score_white": 18,
+        "black_stats": {
+          "avg_depth": 10.33,
+          "avg_time": 4.6822,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 11219.1,
+          "avg_time": 5.0071,
+          "max_depth": 111924
+        }
+      },
+      {
+        "no": 9,
+        "winner": "Black",
+        "score_black": 57,
+        "score_white": 0,
+        "black_stats": {
+          "avg_depth": 6.79,
+          "avg_time": 5.0396,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 3337.48,
+          "avg_time": 5.0019,
+          "max_depth": 21827
+        }
+      },
+      {
+        "no": 10,
+        "winner": "Black",
+        "score_black": 53,
+        "score_white": 11,
+        "black_stats": {
+          "avg_depth": 10.67,
+          "avg_time": 4.4969,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 6860.45,
+          "avg_time": 5.0051,
+          "max_depth": 48637
+        }
+      }
+    ]
+  },
+  {
+    "mode": "Bot vs Bot",
+    "timestamp": "2025-12-16T11:26:46.793461",
+    "total_games": 1,
+    "result_summary": "Menang: Black (0) - White (1) | Seri: 0",
+    "ai_config": {
+      "black": "Minimax (D=3)",
+      "white": "Minimax (D=3)",
+      "time_limit": 2.0
+    },
+    "winner": "White",
+    "games": [
+      {
+        "no": 1,
+        "winner": "White",
+        "score_black": 15,
+        "score_white": 49,
+        "black_stats": {
+          "avg_depth": 0,
+          "avg_time": 0,
+          "max_depth": 0
+        },
+        "white_stats": {
+          "avg_depth": 7.5,
+          "avg_time": 1.8778,
+          "max_depth": 64
+        }
+      }
+    ]
+  },
+  {
+    "mode": "Bot vs Bot",
+    "timestamp": "2025-12-16T11:54:41.088147",
+    "total_games": 10,
+    "result_summary": "Menang: Black (4) - White (6) | Seri: 0",
+    "ai_config": {
+      "black": "Minimax (D=20)",
+      "white": "MCTS (D=20)",
+      "time_limit": 1.0
+    },
+    "winner": "White",
+    "games": [
+      {
+        "no": 1,
+        "winner": "Black",
+        "score_black": 55,
+        "score_white": 8,
+        "black_stats": {
+          "avg_depth": 9.67,
+          "avg_time": 0.9607,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 2660.86,
+          "avg_time": 1.0009,
+          "max_depth": 24387
+        }
+      },
+      {
+        "no": 2,
+        "winner": "Black",
+        "score_black": 57,
+        "score_white": 7,
+        "black_stats": {
+          "avg_depth": 9.53,
+          "avg_time": 0.9564,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 2442.83,
+          "avg_time": 1.0009,
+          "max_depth": 22544
+        }
+      },
+      {
+        "no": 3,
+        "winner": "Black",
+        "score_black": 53,
+        "score_white": 11,
+        "black_stats": {
+          "avg_depth": 8.27,
+          "avg_time": 0.9806,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 3261.45,
+          "avg_time": 1.0011,
+          "max_depth": 33855
+        }
+      },
+      {
+        "no": 4,
+        "winner": "White",
+        "score_black": 29,
+        "score_white": 35,
+        "black_stats": {
+          "avg_depth": 9.2,
+          "avg_time": 0.9785,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 3822.87,
+          "avg_time": 1.0008,
+          "max_depth": 35576
+        }
+      },
+      {
+        "no": 5,
+        "winner": "White",
+        "score_black": 21,
+        "score_white": 43,
+        "black_stats": {
+          "avg_depth": 4.92,
+          "avg_time": 0.9298,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 2486.13,
+          "avg_time": 1.0009,
+          "max_depth": 28830
+        }
+      },
+      {
+        "no": 6,
+        "winner": "White",
+        "score_black": 30,
+        "score_white": 34,
+        "black_stats": {
+          "avg_depth": 7.31,
+          "avg_time": 0.9836,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 3791.67,
+          "avg_time": 1.0012,
+          "max_depth": 35367
+        }
+      },
+      {
+        "no": 7,
+        "winner": "White",
+        "score_black": 20,
+        "score_white": 44,
+        "black_stats": {
+          "avg_depth": 7.69,
+          "avg_time": 0.9048,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 3356.61,
+          "avg_time": 1.001,
+          "max_depth": 35514
+        }
+      },
+      {
+        "no": 8,
+        "winner": "White",
+        "score_black": 23,
+        "score_white": 41,
+        "black_stats": {
+          "avg_depth": 6.57,
+          "avg_time": 0.9782,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 2858.03,
+          "avg_time": 1.0009,
+          "max_depth": 23620
+        }
+      },
+      {
+        "no": 9,
+        "winner": "Black",
+        "score_black": 48,
+        "score_white": 16,
+        "black_stats": {
+          "avg_depth": 9.33,
+          "avg_time": 0.9736,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 3612.8,
+          "avg_time": 1.001,
+          "max_depth": 28274
+        }
+      },
+      {
+        "no": 10,
+        "winner": "White",
+        "score_black": 28,
+        "score_white": 36,
+        "black_stats": {
+          "avg_depth": 7.66,
+          "avg_time": 0.9746,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 3544.27,
+          "avg_time": 1.0012,
+          "max_depth": 33115
+        }
+      }
+    ]
+  },
+  {
+    "mode": "Bot vs Bot",
+    "timestamp": "2025-12-16T12:05:29.973783",
+    "total_games": 10,
+    "result_summary": "Menang: Black (4) - White (6) | Seri: 0",
+    "ai_config": {
+      "black": "Minimax (D=20)",
+      "white": "AlphaBeta (D=20)",
+      "time_limit": 1.0
+    },
+    "winner": "White",
+    "games": [
+      {
+        "no": 1,
+        "winner": "White",
+        "score_black": 22,
+        "score_white": 41,
+        "black_stats": {
+          "avg_depth": 3.7,
+          "avg_time": 1.0099,
+          "max_depth": 22
+        },
+        "white_stats": {
+          "avg_depth": 13.6,
+          "avg_time": 0.935,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 2,
+        "winner": "White",
+        "score_black": 7,
+        "score_white": 57,
+        "black_stats": {
+          "avg_depth": 6.0,
+          "avg_time": 0.8885,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 12.53,
+          "avg_time": 0.9281,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 3,
+        "winner": "Black",
+        "score_black": 48,
+        "score_white": 16,
+        "black_stats": {
+          "avg_depth": 9.4,
+          "avg_time": 0.948,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 11.45,
+          "avg_time": 0.9821,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 4,
+        "winner": "White",
+        "score_black": 20,
+        "score_white": 44,
+        "black_stats": {
+          "avg_depth": 7.66,
+          "avg_time": 0.964,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 12.07,
+          "avg_time": 0.9344,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 5,
+        "winner": "Black",
+        "score_black": 45,
+        "score_white": 19,
+        "black_stats": {
+          "avg_depth": 9.27,
+          "avg_time": 0.9717,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 11.66,
+          "avg_time": 0.941,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 6,
+        "winner": "Black",
+        "score_black": 56,
+        "score_white": 8,
+        "black_stats": {
+          "avg_depth": 10.19,
+          "avg_time": 0.9482,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 8.96,
+          "avg_time": 0.9811,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 7,
+        "winner": "Black",
+        "score_black": 38,
+        "score_white": 26,
+        "black_stats": {
+          "avg_depth": 9.0,
+          "avg_time": 1.0066,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 11.45,
+          "avg_time": 0.9465,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 8,
+        "winner": "White",
+        "score_black": 24,
+        "score_white": 40,
+        "black_stats": {
+          "avg_depth": 9.27,
+          "avg_time": 0.9818,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 11.86,
+          "avg_time": 0.9212,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 9,
+        "winner": "White",
+        "score_black": 24,
+        "score_white": 39,
+        "black_stats": {
+          "avg_depth": 9.13,
+          "avg_time": 0.9814,
+          "max_depth": 64
+        },
+        "white_stats": {
+          "avg_depth": 11.1,
+          "avg_time": 0.982,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 10,
+        "winner": "White",
+        "score_black": 22,
+        "score_white": 42,
+        "black_stats": {
+          "avg_depth": 3.17,
+          "avg_time": 0.8552,
+          "max_depth": 6
+        },
+        "white_stats": {
+          "avg_depth": 11.79,
+          "avg_time": 0.9325,
+          "max_depth": 64
+        }
+      }
+    ]
+  },
+  {
+    "mode": "Bot vs Bot",
+    "timestamp": "2025-12-16T12:19:31.826668",
+    "total_games": 10,
+    "result_summary": "Menang: Black (4) - White (5) | Seri: 1",
+    "ai_config": {
+      "black": "MCTS (D=20)",
+      "white": "AlphaBeta (D=20)",
+      "time_limit": 1.0
+    },
+    "winner": "White",
+    "games": [
+      {
+        "no": 1,
+        "winner": "White",
+        "score_black": 3,
+        "score_white": 60,
+        "black_stats": {
+          "avg_depth": 1975.52,
+          "avg_time": 1.0013,
+          "max_depth": 13203
+        },
+        "white_stats": {
+          "avg_depth": 14.87,
+          "avg_time": 0.9105,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 2,
+        "winner": "White",
+        "score_black": 16,
+        "score_white": 48,
+        "black_stats": {
+          "avg_depth": 1962.21,
+          "avg_time": 1.0034,
+          "max_depth": 14803
+        },
+        "white_stats": {
+          "avg_depth": 13.6,
+          "avg_time": 0.9169,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 3,
+        "winner": "Black",
+        "score_black": 44,
+        "score_white": 20,
+        "black_stats": {
+          "avg_depth": 3058.26,
+          "avg_time": 1.001,
+          "max_depth": 37026
+        },
+        "white_stats": {
+          "avg_depth": 9.15,
+          "avg_time": 0.8853,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 4,
+        "winner": "White",
+        "score_black": 0,
+        "score_white": 64,
+        "black_stats": {
+          "avg_depth": 1577.07,
+          "avg_time": 1.0011,
+          "max_depth": 9314
+        },
+        "white_stats": {
+          "avg_depth": 14.19,
+          "avg_time": 0.9022,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 5,
+        "winner": "White",
+        "score_black": 11,
+        "score_white": 53,
+        "black_stats": {
+          "avg_depth": 2562.07,
+          "avg_time": 1.002,
+          "max_depth": 25266
+        },
+        "white_stats": {
+          "avg_depth": 15.48,
+          "avg_time": 0.9129,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 6,
+        "winner": "Black",
+        "score_black": 40,
+        "score_white": 24,
+        "black_stats": {
+          "avg_depth": 2909.29,
+          "avg_time": 1.0013,
+          "max_depth": 25005
+        },
+        "white_stats": {
+          "avg_depth": 9.14,
+          "avg_time": 0.962,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 7,
+        "winner": "Black",
+        "score_black": 39,
+        "score_white": 25,
+        "black_stats": {
+          "avg_depth": 2542.47,
+          "avg_time": 1.0009,
+          "max_depth": 24953
+        },
+        "white_stats": {
+          "avg_depth": 8.96,
+          "avg_time": 0.9858,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 8,
+        "winner": "Black",
+        "score_black": 36,
+        "score_white": 28,
+        "black_stats": {
+          "avg_depth": 3169.73,
+          "avg_time": 1.0011,
+          "max_depth": 30885
+        },
+        "white_stats": {
+          "avg_depth": 12.21,
+          "avg_time": 0.9349,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 9,
+        "winner": "Draw",
+        "score_black": 32,
+        "score_white": 32,
+        "black_stats": {
+          "avg_depth": 3611.47,
+          "avg_time": 1.0012,
+          "max_depth": 29590
+        },
+        "white_stats": {
+          "avg_depth": 12.07,
+          "avg_time": 0.9275,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 10,
+        "winner": "White",
+        "score_black": 14,
+        "score_white": 50,
+        "black_stats": {
+          "avg_depth": 2643.2,
+          "avg_time": 1.001,
+          "max_depth": 22931
+        },
+        "white_stats": {
+          "avg_depth": 13.27,
+          "avg_time": 0.94,
+          "max_depth": 64
+        }
+      }
+    ]
+  },
+  {
+    "mode": "Bot vs Bot",
+    "timestamp": "2025-12-16T12:30:38.324848",
+    "total_games": 10,
+    "result_summary": "Menang: Black (8) - White (2) | Seri: 0",
+    "ai_config": {
+      "black": "MCTS (D=20)",
+      "white": "Minimax (D=20)",
+      "time_limit": 1.0
+    },
+    "winner": "Black",
+    "games": [
+      {
+        "no": 1,
+        "winner": "Black",
+        "score_black": 33,
+        "score_white": 31,
+        "black_stats": {
+          "avg_depth": 1970.74,
+          "avg_time": 1.0012,
+          "max_depth": 13125
+        },
+        "white_stats": {
+          "avg_depth": 3.38,
+          "avg_time": 0.962,
+          "max_depth": 18
+        }
+      },
+      {
+        "no": 2,
+        "winner": "Black",
+        "score_black": 39,
+        "score_white": 25,
+        "black_stats": {
+          "avg_depth": 2137.9,
+          "avg_time": 1.0009,
+          "max_depth": 24751
+        },
+        "white_stats": {
+          "avg_depth": 4.96,
+          "avg_time": 0.8887,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 3,
+        "winner": "Black",
+        "score_black": 37,
+        "score_white": 27,
+        "black_stats": {
+          "avg_depth": 2974.87,
+          "avg_time": 1.0009,
+          "max_depth": 25049
+        },
+        "white_stats": {
+          "avg_depth": 7.93,
+          "avg_time": 0.9666,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 4,
+        "winner": "White",
+        "score_black": 0,
+        "score_white": 64,
+        "black_stats": {
+          "avg_depth": 1692.61,
+          "avg_time": 1.0008,
+          "max_depth": 15653
+        },
+        "white_stats": {
+          "avg_depth": 9.74,
+          "avg_time": 0.9596,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 5,
+        "winner": "Black",
+        "score_black": 34,
+        "score_white": 30,
+        "black_stats": {
+          "avg_depth": 2795.43,
+          "avg_time": 1.0009,
+          "max_depth": 26397
+        },
+        "white_stats": {
+          "avg_depth": 8.9,
+          "avg_time": 0.9726,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 6,
+        "winner": "Black",
+        "score_black": 43,
+        "score_white": 21,
+        "black_stats": {
+          "avg_depth": 2652.16,
+          "avg_time": 1.0012,
+          "max_depth": 24678
+        },
+        "white_stats": {
+          "avg_depth": 5.52,
+          "avg_time": 0.9513,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 7,
+        "winner": "Black",
+        "score_black": 36,
+        "score_white": 28,
+        "black_stats": {
+          "avg_depth": 2295.55,
+          "avg_time": 1.0008,
+          "max_depth": 17161
+        },
+        "white_stats": {
+          "avg_depth": 9.4,
+          "avg_time": 0.9393,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 8,
+        "winner": "White",
+        "score_black": 23,
+        "score_white": 41,
+        "black_stats": {
+          "avg_depth": 3128.87,
+          "avg_time": 1.001,
+          "max_depth": 29002
+        },
+        "white_stats": {
+          "avg_depth": 7.86,
+          "avg_time": 0.959,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 9,
+        "winner": "Black",
+        "score_black": 35,
+        "score_white": 29,
+        "black_stats": {
+          "avg_depth": 2795.07,
+          "avg_time": 1.0032,
+          "max_depth": 30133
+        },
+        "white_stats": {
+          "avg_depth": 8.0,
+          "avg_time": 0.9651,
+          "max_depth": 64
+        }
+      },
+      {
+        "no": 10,
+        "winner": "Black",
+        "score_black": 43,
+        "score_white": 21,
+        "black_stats": {
+          "avg_depth": 2660.1,
+          "avg_time": 1.0009,
+          "max_depth": 24977
+        },
+        "white_stats": {
+          "avg_depth": 6.71,
+          "avg_time": 0.9991,
+          "max_depth": 64
+        }
+      }
+    ]
+  }
+]
